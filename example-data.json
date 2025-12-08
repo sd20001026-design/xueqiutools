@@ -1,0 +1,92 @@
+[
+  {
+    "user_id": "user001",
+    "unit_sequence": 0,
+    "answer_right_rate": 0.8,
+    "first_finish_stage_cost_seconds": "0小时2分0秒",
+    "first_finish_answer_step_fail_cnt": 2,
+    "real_name": "张三",
+    "package_grade": "三年级",
+    "counselor_name": "李老师"
+  },
+  {
+    "user_id": "user001",
+    "unit_sequence": 1,
+    "answer_right_rate": 0.75,
+    "first_finish_stage_cost_seconds": "0小时3分0秒",
+    "first_finish_answer_step_fail_cnt": 3,
+    "real_name": "张三",
+    "package_grade": "三年级",
+    "counselor_name": "李老师"
+  },
+  {
+    "user_id": "user001",
+    "unit_sequence": 2,
+    "answer_right_rate": 0.85,
+    "first_finish_stage_cost_seconds": "0小时2分30秒",
+    "first_finish_answer_step_fail_cnt": 1,
+    "real_name": "张三",
+    "package_grade": "三年级",
+    "counselor_name": "李老师"
+  },
+  {
+    "user_id": "user001",
+    "unit_sequence": 3,
+    "answer_right_rate": 0.6,
+    "first_finish_stage_cost_seconds": "0小时3分20秒",
+    "first_finish_answer_step_fail_cnt": 4,
+    "real_name": "张三",
+    "package_grade": "三年级",
+    "counselor_name": "李老师"
+  },
+  {
+    "user_id": "user001",
+    "unit_sequence": 4,
+    "answer_right_rate": 0.9,
+    "first_finish_stage_cost_seconds": "0小时2分20秒",
+    "first_finish_answer_step_fail_cnt": 1,
+    "real_name": "张三",
+    "package_grade": "三年级",
+    "counselor_name": "李老师"
+  },
+  {
+    "user_id": "user001",
+    "unit_sequence": 5,
+    "answer_right_rate": 0.7,
+    "first_finish_stage_cost_seconds": "0小时2分40秒",
+    "first_finish_answer_step_fail_cnt": 2,
+    "real_name": "张三",
+    "package_grade": "三年级",
+    "counselor_name": "李老师"
+  },
+  {
+    "user_id": "user002",
+    "unit_sequence": 0,
+    "answer_right_rate": 0.9,
+    "first_finish_stage_cost_seconds": "0小时1分40秒",
+    "first_finish_answer_step_fail_cnt": 1,
+    "real_name": "李四",
+    "package_grade": "三年级",
+    "counselor_name": "王老师"
+  },
+  {
+    "user_id": "user002",
+    "unit_sequence": 1,
+    "answer_right_rate": 0.8,
+    "first_finish_stage_cost_seconds": "0小时2分10秒",
+    "first_finish_answer_step_fail_cnt": 2,
+    "real_name": "李四",
+    "package_grade": "三年级",
+    "counselor_name": "王老师"
+  },
+  {
+    "user_id": "user002",
+    "unit_sequence": 2,
+    "answer_right_rate": 0.75,
+    "first_finish_stage_cost_seconds": "0小时2分20秒",
+    "first_finish_answer_step_fail_cnt": 3,
+    "real_name": "李四",
+    "package_grade": "三年级",
+    "counselor_name": "王老师"
+  }
+]
