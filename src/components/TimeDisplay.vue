@@ -1,7 +1,7 @@
 <template>
   <div class="time-display">
     <div class="time-header">
-      <h3>学习时长详情</h3>
+      <h3>{{ userName ? `学习时长详情（${userName}）` : '学习时长详情' }}</h3>
       <div class="time-summary">
         <div class="time-item">
           <span class="time-label">平均时长:</span>
@@ -52,6 +52,7 @@ interface Props {
   times: number[]
   unitSequences: number[]
   encouragement: string
+  userName?: string
 }
 
 const props = defineProps<Props>()

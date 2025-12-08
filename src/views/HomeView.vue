@@ -136,6 +136,7 @@
               :unit-sequences="store.chartData.unitSequence"
               :encouragement="store.encouragement"
               :study-duration-comment="store.studyDurationComment"
+              :user-name="store.selectedUser?.userName"
             />
           </el-card>
         </div>
@@ -148,6 +149,7 @@
               title="课程正确率趋势"
               :selected-index="selectedIndex"
               :correct-rate-trend-comment="store.correctRateTrendComment"
+              :user-name="store.selectedUser?.userName"
               @update:selected-index="selectedIndex = $event"
             />
           </el-card>
@@ -160,6 +162,7 @@
               :class-averages="store.classStats.averageErrorCountByUnit"
               title="作答错误次数统计"
               :error-count-comment="store.errorCountComment"
+              :user-name="store.selectedUser?.userName"
             />
           </el-card>
         </div>

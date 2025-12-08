@@ -19,6 +19,7 @@ interface Props {
   title: string
   selectedIndex?: number
   correctRateTrendComment?: string
+  userName?: string
 }
 
 const emit = defineEmits<{
@@ -47,9 +48,12 @@ const initChart = () => {
   const minCorrectRate = validRates.length > 0 ? Math.min(...validRates) : 0
   const yAxisMin = minCorrectRate > 0 ? Math.floor(minCorrectRate * 100) / 100 : 0
 
+  // 生成标题，如果有学员名称则在标题后添加
+  const displayTitle = props.userName ? `${props.title}（${props.userName}）` : props.title
+
   const option = {
     title: {
-      text: props.title,
+      text: displayTitle,
       left: 'center',
       textStyle: {
         fontSize: 16,
@@ -185,7 +189,7 @@ const resizeChart = () => {
   }
 }
 
-watch([() => props.data, () => props.labels, () => props.title, () => props.selectedIndex], async () => {
+watch([() => props.data, () => props.labels, () => props.title, () => props.selectedIndex, () => props.userName], async () => {
   await nextTick()
   initChart()
 }, { deep: true })
