@@ -106,6 +106,18 @@
 
     <!-- 图表展示区域 -->
     <div v-if="selectedUserData.length > 0" class="charts-section">
+      <!-- 截图下载按钮 -->
+      <div class="screenshot-section">
+        <el-button
+          type="primary"
+          icon="Camera"
+          @click="downloadScreenshot"
+          :loading="screenshotLoading"
+          class="screenshot-btn"
+        >
+          {{ screenshotLoading ? '生成截图中...' : '下载图表截图' }}
+        </el-button>
+      </div>
       <!-- 第一行：学生档案+勋章（整行横向排列） -->
       <div class="chart-row profile-row">
         <div class="chart-col-full">
@@ -198,7 +210,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { UploadFilled } from '@element-plus/icons-vue'
+import { UploadFilled, Camera } from '@element-plus/icons-vue'
 import { useLearningDataStore } from '@/stores/learningData'
 import { useCourseSettingsStore } from '@/stores/courseSettings'
 import { parseExcelFile, getUserList } from '@/utils/excelParser'
@@ -240,6 +252,7 @@ const fileList = ref([])
 const selectedUserId = ref('')
 const selectedIndex = ref(-1)
 const selectedCourseTemplate = ref('default')
+const screenshotLoading = ref(false)
 
 const createCoursesFromNames = (names: string[]) => {
   return names.map((name, index) => ({
@@ -468,6 +481,58 @@ const scrollToSelection = () => {
     selectionElement.scrollIntoView({ behavior: 'smooth' })
   }
 }
+
+// 下载图表截图
+const downloadScreenshot = async () => {
+  try {
+    screenshotLoading.value = true
+
+    // 动态加载html2canvas
+    if (!(window as any).html2canvas) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js'
+        script.onload = resolve
+        script.onerror = reject
+        document.head.appendChild(script)
+      })
+    }
+
+    const html2canvas = (window as any).html2canvas
+
+    // 获取图表区域的DOM元素
+    const chartsSection = document.querySelector('.charts-section')
+    if (!chartsSection) {
+      ElMessage.error('未找到图表区域')
+      return
+    }
+
+    // 使用html2canvas生成截图
+    const canvas = await html2canvas(chartsSection, {
+      backgroundColor: '#f5f7fa', // 设置背景色与页面一致
+      scale: 2, // 提高分辨率
+      useCORS: true, // 允许跨域图片
+      allowTaint: false,
+      width: chartsSection.offsetWidth,
+      height: chartsSection.offsetHeight
+    })
+
+    // 创建下载链接
+    const link = document.createElement('a')
+    link.download = `学习数据分析图表_${store.selectedUser?.userName || '未命名'}_${new Date().toLocaleDateString('zh-CN').replace(/\//g, '-')}.png`
+    link.href = canvas.toDataURL('image/png')
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+
+    ElMessage.success('截图已下载成功！')
+  } catch (error) {
+    console.error('截图生成失败:', error)
+    ElMessage.error('截图生成失败，请重试')
+  } finally {
+    screenshotLoading.value = false
+  }
+}
 </script>
 
 <style scoped>
@@ -536,6 +601,26 @@ const scrollToSelection = () => {
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+
+.screenshot-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.screenshot-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.screenshot-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
 .chart-row {
